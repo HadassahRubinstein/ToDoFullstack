@@ -7,13 +7,13 @@ services:
     image: todoapi
     build:
       context: .
-      dockerfile: TodoApi/Dockerfile
+      dockerfile: ./Dockerfile
       args:
         - configuration=Debug
     ports:
       - 80:80
-      - 433:433
+      - 443:443
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
-      - ~/.vsdbg:c:\remote_debugger:rw
+      - ~/.vsdbg:/remote_debugger:rw

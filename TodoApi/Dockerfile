@@ -1,17 +1,17 @@
-FROM mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-1809 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 433
+EXPOSE 443
 
 ENV ASPNETCORE_URLS=http://+:80
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0-nanoserver-1809 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["TodoApi/TodoApi.csproj", "TodoApi/"]
-RUN dotnet restore "TodoApi\TodoApi.csproj"
+COPY ["TodoApi.csproj", "./"]
+RUN dotnet restore "TodoApi.csproj"
 COPY . .
-WORKDIR "/src/TodoApi"
+WORKDIR "/src/."
 RUN dotnet build "TodoApi.csproj" -c $configuration -o /app/build
 
 FROM build AS publish

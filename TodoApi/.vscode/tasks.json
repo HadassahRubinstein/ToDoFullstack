@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/TodoApi/TodoApi.csproj",
+                "${workspaceFolder}/TodoApi.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/TodoApi/TodoApi.csproj",
+                "${workspaceFolder}/TodoApi.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/TodoApi/TodoApi.csproj"
+                "${workspaceFolder}/TodoApi.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -44,14 +44,14 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "todolistfullstack:dev",
+                "tag": "todoapi:dev",
                 "target": "base",
-                "dockerfile": "${workspaceFolder}/TodoApi/Dockerfile",
+                "dockerfile": "${workspaceFolder}/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/TodoApi/TodoApi.csproj"
+                "appProject": "${workspaceFolder}/TodoApi.csproj"
             }
         },
         {
@@ -61,17 +61,17 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "todolistfullstack:latest",
-                "dockerfile": "${workspaceFolder}/TodoApi/Dockerfile",
+                "tag": "todoapi:latest",
+                "dockerfile": "${workspaceFolder}/Dockerfile",
                 "context": "${workspaceFolder}",
                 "platform": {
-                    "os": "windows",
+                    "os": "linux",
                     "architecture": "amd64"
                 },
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/TodoApi/TodoApi.csproj"
+                "appProject": "${workspaceFolder}/TodoApi.csproj"
             }
         },
         {
@@ -80,11 +80,9 @@
             "dependsOn": [
                 "docker-build: debug"
             ],
-            "dockerRun": {
-                "os": "Windows"
-            },
+            "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/TodoApi/TodoApi.csproj",
+                "appProject": "${workspaceFolder}/TodoApi.csproj",
                 "enableDebugging": true
             }
         },
@@ -94,11 +92,9 @@
             "dependsOn": [
                 "docker-build: release"
             ],
-            "dockerRun": {
-                "os": "Windows"
-            },
+            "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/TodoApi/TodoApi.csproj"
+                "appProject": "${workspaceFolder}/TodoApi.csproj"
             }
         }
     ]
