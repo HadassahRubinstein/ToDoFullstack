@@ -29,11 +29,11 @@ var app = builder.Build();
 app.UseCors();
 
 // הפעלת Swagger אם האפליקציה פועלת במצב פיתוח
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+// }
 
 // מיפוי של כל ה-routes
 
@@ -73,5 +73,5 @@ app.MapDelete("/tasks/{id}", async (ToDoDbContext dbContext, int id) =>
     await dbContext.SaveChangesAsync();
     return Results.NoContent();
 });
-
+app.MapGet("/",()=>"ToDoApi is running");
 app.Run();
